@@ -23,15 +23,34 @@ const Paymenyt: FC<Props> = ({
 
     const { control, handleSubmit, setValue } = useForm();
     const router = useRouter();
-    const onSubmit  = (data: any) => {
+    const onSubmit = (data: any) => {
         const selectedAsset = filterdAssets.find(asset => asset.fireblockAssetId === data.assetId);
-        router.push({
-            query: { assetId: data.assetId, assetName: selectedAsset?.name, email: data.email, amount: data.amount },
-            pathname: '/paymentfinal',
+    
+        if (!selectedAsset) {
+            console.error('Selected asset not found');
+            return;
+        }
+    
+        console.log('Navigating to /paymentfinal with data:', {
+            assetId: data.assetId,
+            assetName: selectedAsset.name,
+            email: data.email,
+            amount: data.amount
         });
+    
+        router.push({
+            pathname: '/paymentfinal',
+            query: {
+                assetId: data.assetId,
+                assetName: selectedAsset.name,
+                email: data.email,
+                amount: data.amount
+            }
+        });
+    
         setTimeout(() => {
             window.location.reload();
-        }, 1000)
+        }, 1000);
     };
 
    

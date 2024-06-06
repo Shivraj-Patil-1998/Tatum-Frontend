@@ -13,7 +13,7 @@ import { getAllAssets, getGasAddress } from "@/Api/CreateWallet";
 interface Props {
 
 }
-const PaymenytFinal: FC<Props> = ({
+const PaymentFinal: FC<Props> = ({
 }) => {
 
     const { control, handleSubmit, setValue } = useForm();
@@ -178,4 +178,4 @@ const PaymenytFinal: FC<Props> = ({
     );
 };
 
-export default PaymenytFinal;
+export default PaymentFinal;
