@@ -13,7 +13,7 @@ import { getAllAssets, getGasAddress } from "@/Api/CreateWallet";
 interface Props {
 
 }
-const PaymentFinal: FC<Props> = ({
+const PaymenytFinal: FC<Props> = ({
 }) => {
 
     const { control, handleSubmit, setValue } = useForm();
@@ -40,33 +40,33 @@ const PaymentFinal: FC<Props> = ({
         return () => clearInterval(timer);
     }, [router]);
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         getOperationType();
-    //     },1000)
-    // }, [router.query])
+    useEffect(() => {
+        setTimeout(() => {
+            getOperationType();
+        },1000)
+    }, [router.query])
 
-    // const getOperationType = async () => {
-    //     const data = { chain: assetName };
-    //     if (assetName === "BTC") {
-    //         console.log("btc trigger");
-    //         const [res] = await getAllAssets(data);
-    //         if (res !== null) {
-    //             setValue('btc_pay', res.body?.address);
-    //             setCreatedAddress(res.body?.address)
-    //         }
-    //     } else {
-    //         if (assetName === "Ethereum") {
-    //             const eth = 'ETH';
-    //             const dataEth = { chain: eth ? eth : assetName, from: 0, to: 0 };
-    //             const [res] = await getGasAddress(dataEth);
-    //             if (res !== null) {
-    //                 setValue('btc_pay', res.body[0]);
-    //                 setCreatedAddress(res.body[0]);
-    //             }
-    //         }
-    //     }
-    // };
+    const getOperationType = async () => {
+        const data = { chain: assetName };
+        if (assetName === "BTC") {
+            console.log("btc trigger");
+            const [res] = await getAllAssets(data);
+            if (res !== null) {
+                setValue('btc_pay', res.body?.address);
+                setCreatedAddress(res.body?.address)
+            }
+        } else {
+            if (assetName === "Ethereum") {
+                const eth = 'ETH';
+                const dataEth = { chain: eth ? eth : assetName, from: 0, to: 0 };
+                const [res] = await getGasAddress(dataEth);
+                if (res !== null) {
+                    setValue('btc_pay', res.body[0]);
+                    setCreatedAddress(res.body[0]);
+                }
+            }
+        }
+    };
 
     const handleCopy = async (value: string | any) => {
         try {
@@ -145,14 +145,14 @@ const PaymentFinal: FC<Props> = ({
                     <span className="line-space-payment"></span>
                     <div className="py-4">
                         <div className="font-normal text-sm">Amount to Pay</div>
-                        {/* <div className="flex font-bold text-2xl gap-3">{amount} {assetName}
+                        <div className="flex font-bold text-2xl gap-3">{amount} {assetName}
                             <span> <Image
                                 onClick={() => handleCopy(amount)}
                                 className="cursor-pointer pt-1"
                                 src={Copy as StaticImageData}
                                 alt="Copy"
                             /></span>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="relative w-full">
                         <ExchangeInputOne
@@ -178,4 +178,4 @@ const PaymentFinal: FC<Props> = ({
     );
 };
 
-export default PaymentFinal;
+export default PaymenytFinal;
