@@ -40,12 +40,12 @@ const Paymenyt: FC<Props> = ({
     
         router.push({
             pathname: '/paymentfinal',
-            query: {
-                assetId: data.assetId,
-                assetName: selectedAsset.name,
-                email: data.email,
-                amount: data.amount
-            }
+            // query: {
+            //     assetId: data.assetId,
+            //     assetName: selectedAsset.name,
+            //     email: data.email,
+            //     amount: data.amount
+            // }
         });
     
         setTimeout(() => {
