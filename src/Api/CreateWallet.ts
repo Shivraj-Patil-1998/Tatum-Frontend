@@ -1,5 +1,6 @@
-import ProtectedAxiosInstance from "./utils/apiBaseUrl";
+// import ProtectedAxiosInstance from "./utils/apiBaseUrl";
 import { ApiHandler } from "./utils/fetchUtil";
+import axios from "axios";
 
 interface APIResponse<T> {
   body: T;
@@ -18,10 +19,17 @@ interface Assets {
     body: any
 }
 
+const ProtectedAxiosInstance = axios.create({
+  baseURL: 'http://35.232.113.249:8080',
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 const getAllAssets: APIFunction<Assets> = async (data) =>
   ApiHandler(async () => await ProtectedAxiosInstance.post("/generate-custodial-managed-wallet", data));
 
 const getGasAddress: APIFunction<any> = async (data) =>
   ApiHandler(async () => await ProtectedAxiosInstance.post("/create-gas-address", data));
 
-export { getAllAssets, getGasAddress };
+export { getAllAssets, getGasAddress, ProtectedAxiosInstance };
