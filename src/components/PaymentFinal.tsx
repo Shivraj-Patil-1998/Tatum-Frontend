@@ -18,7 +18,7 @@ const PaymentFinal: FC<Props> = ({
 
     const { control, handleSubmit, setValue } = useForm();
     const router = useRouter();
-    // const { assetId, email, amount, assetName } = router.query;
+    const { assetId, email, amount, assetName } = router.query;
     const [createAddress, setCreatedAddress] = useState<string>('');
     const [progress, setProgress] = useState(100);
     const [timeLeft, setTimeLeft] = useState(120);
@@ -40,11 +40,11 @@ const PaymentFinal: FC<Props> = ({
         return () => clearInterval(timer);
     }, [router]);
 
-    useEffect(() => {
-        setTimeout(() => {
-            getOperationType();
-        },1000)
-    }, [router.query])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         getOperationType();
+    //     },1000)
+    // }, [router.query])
 
     // const getOperationType = async () => {
     //     const data = { chain: assetName };
