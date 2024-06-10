@@ -9,6 +9,7 @@ import Barcode from "../assets/barcode.svg";
 import ExchangeInputOne from "./ExchangeInput1";
 import { useRouter } from 'next/router';
 import { getAllAssets, getGasAddress } from "@/Api/CreateWallet";
+import qr from "qrcode";
 
 interface Props {
 
@@ -20,6 +21,7 @@ const PaymenytFinal: FC<Props> = ({
     const router = useRouter();
     const { assetId, email, amount, assetName } = router.query;
     const [createAddress, setCreatedAddress] = useState<string>('');
+    const [qrCode, setQrCode] = useState<string>('');
     const [progress, setProgress] = useState(100);
     const [timeLeft, setTimeLeft] = useState(120);
 
@@ -43,7 +45,7 @@ const PaymenytFinal: FC<Props> = ({
     useEffect(() => {
         setTimeout(() => {
             getOperationType();
-        },1000)
+        }, 1000)
     }, [router.query])
 
     const getOperationType = async () => {
@@ -54,6 +56,8 @@ const PaymenytFinal: FC<Props> = ({
             if (res !== null) {
                 setValue('btc_pay', res.body?.address);
                 setCreatedAddress(res.body?.address)
+                const qrCodeData = await qr.toDataURL(res.body?.address);
+                setQrCode(qrCodeData);
             }
         } else {
             if (assetName === "Ethereum") {
@@ -102,11 +106,9 @@ const PaymenytFinal: FC<Props> = ({
                             </div>
                         </div>
                         <div className="flex-[1 1 0%]">
-                            <Image
-                                className="cursor-pointer pt-7"
-                                src={Barcode as StaticImageData}
-                                alt="Copy"
-                            />
+                            {qrCode && (
+                                <Image className="cursor-pointer pt-7"  width={250} height={250} src={qrCode} alt="QR Code" />
+                            )}
                         </div>
                     </div>
 

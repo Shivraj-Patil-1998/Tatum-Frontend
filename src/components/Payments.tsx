@@ -29,14 +29,14 @@ const Paymenyt: FC<Props> = ({
             query: { assetId: data.assetId, assetName: selectedAsset?.name, email: data.email, amount: data.amount },
             pathname: '/paymentfinal',
         });
-        // setTimeout(() => {
-        //     window.location.reload();
-        // }, 1000)
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000)
     };
 
    
     return (
-        <Container className="flex flex-col gap-2 rounded bg-white py-12 px-28 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.25)] w-8/12">
+        <Container className="flex flex-col gap-2 rounded bg-white md:py-12 md:px-28 px-6  py-4 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.25)]w-[90%] md:w-8/12">
             <div className="my-4 text-start text-base font-semibold">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mx-auto max-w-xll space-y-4 font-bold ">
@@ -174,18 +174,18 @@ const Paymenyt: FC<Props> = ({
                         If the payment amount doesn’t match the amount stated above, we’ll send an email on how to recover the funds.
                     </div>
 
-                    <div className="flex items-center gap-2 py-7">
+                    <div className="flex flex-wrap items-center gap-2 py-7">
                         <input
                             type="checkbox"
                             value={""}
                             className="mt-[2px] cursor-pointer"
                         />
-                        <div className="flex items-center  font-medium text-[#676767]">
-                            I agree to the{" "}
+                        <div className="flex flex-wrap items-center  font-medium text-[#676767]">
+                            <p>I agree to the{" "}</p>
                             <div >
                                 <span className=" text-sm"> </span>
                                 <span
-                                    className=" mx-1 cursor-pointer text-sm text-[#C1922E]"
+                                    className=" w-fit mx-1 cursor-pointer text-sm text-[#C1922E]"
                                 >
                                     Terms Of Use
                                 </span>
